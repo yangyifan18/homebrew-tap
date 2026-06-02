@@ -37,12 +37,16 @@ jobs:
 
       - run: brew test-bot --only-cleanup-before
 
-      - run: brew trust yangyifan18/tap
-
       - run: brew test-bot --only-setup
+        env:
+          HOMEBREW_NO_REQUIRE_TAP_TRUST: 1
 
       - run: brew test-bot --only-tap-syntax
+        env:
+          HOMEBREW_NO_REQUIRE_TAP_TRUST: 1
       - run: brew test-bot --only-formulae
+        env:
+          HOMEBREW_NO_REQUIRE_TAP_TRUST: 1
         if: github.event_name == 'pull_request'
 
       - name: Upload bottles as artifact
